@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ point.title }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>定点詳細 | VALORANT Pointbook</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Rajdhani Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen p-4">
 
-  <h1 class="text-2xl font-bold mb-4 text-center">{{ point.title }}</h1>
-  <p class="text-center text-gray-600 mb-6">{{ point.description }}</p>
+<body class="bg-[#0f1923] text-white min-h-screen p-4">
 
-  <div class="flex flex-col items-center gap-8 max-w-3xl mx-auto">
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-4 text-[#ff4655]">{{ point.title }}</h1>
+  <p class="text-center text-gray-300 mb-8">{{ point.description }}</p>
 
-    <div class="w-full">
-      <h2 class="font-semibold text-center mb-2">📍 立ち位置</h2>
-      <img src="{{ point.stand_image }}" alt="立ち位置" class="w-full rounded-xl shadow">
+  <div class="flex flex-col gap-8 max-w-3xl mx-auto">
+
+    <div>
+      <h2 class="text-lg font-semibold text-center mb-2 text-white">📍 立ち位置</h2>
+      <img src="{{ point.stand_image }}" alt="立ち位置" class="w-full rounded-xl shadow-lg">
     </div>
 
-    <div class="w-full">
-      <h2 class="font-semibold text-center mb-2">🎯 定点</h2>
-      <img src="{{ point.point_image }}" alt="定点" class="w-full rounded-xl shadow">
+    <div>
+      <h2 class="text-lg font-semibold text-center mb-2 text-white">🎯 着弾位置</h2>
+      <img src="{{ point.point_image }}" alt="着弾位置" class="w-full rounded-xl shadow-lg">
     </div>
 
-    <div class="w-full">
-      <h2 class="font-semibold text-center mb-2">👁 着弾</h2>
-      <img src="{{ point.extra_image }}" alt="補足画像" class="w-full rounded-xl shadow">
+    <div>
+      <h2 class="text-lg font-semibold text-center mb-2 text-white">👁 補足</h2>
+      <img src="{{ point.extra_image }}" alt="補足画像" class="w-full rounded-xl shadow-lg">
     </div>
 
   </div>
+
+  <!-- ➕ 定点追加ボタン -->
+  <a href="/add"
+     class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
+    ➕ 定点追加
+  </a>
 
 </body>
 </html>

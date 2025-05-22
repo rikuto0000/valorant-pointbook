@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ロール選択</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 p-4 min-h-screen">
-  <h1 class="text-2xl font-bold mb-6 text-center">
-    {{ map_id | capitalize }} / {{ "攻撃" if side == "attack" else "防衛" }}：ロールを選んでね
-  </h1>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ロール選択 | VALORANT Pointbook</title>
 
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-    <a href="/map/{{ map_id }}/side/{{ side }}/role/duelist" class="bg-red-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-red-600">デュエリスト</a>
-    <a href="/map/{{ map_id }}/side/{{ side }}/role/initiator" class="bg-green-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-green-600">イニシエーター</a>
-    <a href="/map/{{ map_id }}/side/{{ side }}/role/controller" class="bg-blue-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-blue-600">コントローラー</a>
-    <a href="/map/{{ map_id }}/side/{{ side }}/role/sentinel" class="bg-yellow-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-yellow-600">センチネル</a>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Rajdhani Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-[#0f1923] text-white min-h-screen p-4">
+
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">ロールを選択</h1>
+
+  <div class="flex flex-col items-center gap-6 max-w-md mx-auto">
+
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/controller"
+       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+      🌀 コントローラー
+    </a>
+
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/initiator"
+       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+      🔍 イニシエーター
+    </a>
+
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/sentinel"
+       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+      🛡 センチネル
+    </a>
+
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/duelist"
+       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+      ⚔ デュエリスト
+    </a>
+
   </div>
+
+  <!-- ➕ 定点追加ボタン -->
   <a href="/add"
-    class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
+     class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
     ➕ 定点追加
   </a>
+
 </body>
 </html>

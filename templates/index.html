@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>VALORANT 定点図鑑</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マップ選択 | VALORANT Pointbook</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Rajdhani Font（VALORANT風） -->
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwindカスタム設定 -->
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 p-4">
-  <h1 class="text-2xl font-bold mb-4 text-center">マップを選んでね</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+<body class="bg-[#0f1923] text-white min-h-screen p-4">
+
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">マップを選択</h1>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
     {% for map in maps %}
-    <a href="/map/{{ map.id }}" class="block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden">
-      <img src="{{ map.image }}" alt="{{ map.name }}" class="w-full h-40 object-cover">
-      <div class="text-center p-2 font-semibold">{{ map.name }}</div>
-    </a>
+      <a href="/map/{{ map.id }}" class="bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] rounded-xl p-4 flex flex-col items-center transition shadow-lg">
+        <img src="{{ map.image }}" alt="{{ map.name }}" class="w-full h-32 object-cover rounded mb-3 border border-gray-700">
+        <div class="text-lg font-semibold text-center">{{ map.name }}</div>
+      </a>
     {% endfor %}
   </div>
+
+  <!-- ➕ 定点追加ボタン -->
   <a href="/add"
     class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
     ➕ 定点追加
