@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>VALORANT 定点図鑑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+  <h1 class="text-2xl font-bold mb-4 text-center">マップを選んでね</h1>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    {% for map in maps %}
+    <a href="/map/{{ map.id }}" class="block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden">
+      <img src="{{ map.image }}" alt="{{ map.name }}" class="w-full h-40 object-cover">
+      <div class="text-center p-2 font-semibold">{{ map.name }}</div>
+    </a>
+    {% endfor %}
+  </div>
+  <a href="/add"
+    class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
+    ➕ 定点追加
+  </a>
+
+</body>
+</html>

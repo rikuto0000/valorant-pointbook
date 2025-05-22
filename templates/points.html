@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>定点一覧</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 min-h-screen">
+  <h1 class="text-2xl font-bold mb-6 text-center">
+    {{ map_id | capitalize }} / {{ side }} / {{ agent_id }} の定点一覧
+  </h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+    {% for point in points %}
+      <a href="/point/{{ point.id }}" class="block bg-white rounded-xl shadow p-4 hover:shadow-md transition">
+      <img src="{{ point.point_image }}" alt="{{ point.title }}" class="w-full h-48 object-cover mb-2 rounded">
+      <h2 class="font-bold text-lg">{{ point.title }}</h2>
+      <p class="text-sm text-gray-600">{{ point.description }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+
+  {% if points|length == 0 %}
+    <p class="text-center text-gray-500 mt-8">この条件に一致する定点はまだ登録されていません。</p>
+  {% endif %}
+  <a href="/add"
+    class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
+    ➕ 定点追加
+  </a>
+</body>
+</html>

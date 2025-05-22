@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>定点追加</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 min-h-screen">
+
+  <div class="text-center mb-6">
+    <a href="/" class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-xl shadow">
+        ← マップページに戻る
+    </a>
+  </div>
+
+  <h1 class="text-2xl font-bold mb-6 text-center">定点を追加</h1>
+  <form action="/add" method="POST" enctype="multipart/form-data" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+
+    <!-- マップ選択 -->
+    <select name="map" required class="w-full p-2 border rounded">
+      <option value="">マップを選択</option>
+      <option value="ascent">アセント</option>
+      <option value="split">スプリット</option>
+      <option value="bind">バインド</option>
+      <option value="haven">ヘイヴン</option>
+      <option value="breeze">ブリーズ</option>
+      <option value="lotus">ロータス</option>
+      <option value="sunset">サンセット</option>
+      <option value="icebox">アイスボックス</option>
+      <option value="fracture">フラクチャー</option>
+    </select>
+
+    <!-- 攻守選択 -->
+    <select name="side" required class="w-full p-2 border rounded">
+      <option value="">攻守を選択</option>
+      <option value="attack">攻撃</option>
+      <option value="defense">防衛</option>
+    </select>
+
+    <!-- エージェント選択 -->
+    <select name="agent" required class="w-full p-2 border rounded">
+      <option value="">エージェントを選択</option>
+      <option value="brimstone">ブリムストーン</option>
+      <option value="phoenix">フェニックス</option>
+      <option value="sage">セージ</option>
+      <option value="sova">ソーヴァ</option>
+      <option value="viper">ヴァイパー</option>
+      <option value="cypher">サイファー</option>
+      <option value="reyna">レイナ</option>
+      <option value="killjoy">キルジョイ</option>
+      <option value="breach">ブリーチ</option>
+      <option value="omen">オーメン</option>
+      <option value="jett">ジェット</option>
+      <option value="raze">レイズ</option>
+      <option value="skye">スカイ</option>
+      <option value="yoru">ヨル</option>
+      <option value="astra">アストラ</option>
+      <option value="kayo">KAY/O</option>
+      <option value="chamber">チェンバー</option>
+      <option value="neon">ネオン</option>
+      <option value="fade">フェイド</option>
+      <option value="harbor">ハーバー</option>
+      <option value="gekko">ゲッコー</option>
+      <option value="deadlock">デッドロック</option>
+      <option value="clove">クローヴ</option>
+      <option value="iso">イソ</option>
+      <option value="vyse">ヴァイス</option>
+      <option value="tejo">テホ</option>
+      <option value="waylay">ウェイレイ</option>
+    </select>
+
+    <!-- タイトル -->
+    <input name="title" placeholder="タイトル" required class="w-full p-2 border rounded" />
+
+    <!-- 説明 -->
+    <textarea name="description" placeholder="説明" required class="w-full p-2 border rounded"></textarea>
+
+    <!-- 立ち位置画像 -->
+    <label class="block font-semibold">📍 立ち位置画像</label>
+    <input type="file" name="stand_image" accept="image/*" required class="w-full p-2 border rounded" />
+
+    <!-- 定点画像 -->
+    <label class="block font-semibold mt-4">🎯 定点画像</label>
+    <input type="file" name="point_image" accept="image/*" required class="w-full p-2 border rounded" />
+    
+    <!-- 着弾画像 -->
+    <label class="block font-semibold mt-4">👁 着弾画像</label>
+    <input type="file" name="extra_image" accept="image/*" required class="w-full p-2 border rounded" />
+
+
+    <!-- 送信 -->
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">登録</button>
+  </form>
+</body>
+</html>

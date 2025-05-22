@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ロール選択</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 min-h-screen">
+  <h1 class="text-2xl font-bold mb-6 text-center">
+    {{ map_id | capitalize }} / {{ "攻撃" if side == "attack" else "防衛" }}：ロールを選んでね
+  </h1>
+
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/duelist" class="bg-red-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-red-600">デュエリスト</a>
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/initiator" class="bg-green-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-green-600">イニシエーター</a>
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/controller" class="bg-blue-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-blue-600">コントローラー</a>
+    <a href="/map/{{ map_id }}/side/{{ side }}/role/sentinel" class="bg-yellow-500 text-white rounded-xl p-6 text-center font-semibold shadow hover:bg-yellow-600">センチネル</a>
+  </div>
+  <a href="/add"
+    class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
+    ➕ 定点追加
+  </a>
+</body>
+</html>
