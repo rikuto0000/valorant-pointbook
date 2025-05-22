@@ -2,6 +2,16 @@ from flask import Flask, render_template, jsonify, request, redirect
 import json
 import os
 from werkzeug.utils import secure_filename
+import cloudinary
+import cloudinary.uploader
+
+# Cloudinaryの初期設定（取得した情報をここに入れる）
+cloudinary.config(
+    cloud_name="dahgrxpky",
+    api_key="664612899882299",
+    api_secret="kwMpxye5K46cW0XQewXHXf0-m3I"
+)
+
 
 POINTS_JSON = "data/points.json"
 IMAGE_FOLDER = "static/images/points/"
@@ -17,7 +27,7 @@ def add_point():
         title = request.form["title"]
         description = request.form["description"]
 
-        # 3つの画像を受け取る
+        # 画像3枚取得
         stand_file = request.files["stand_image"]
         point_file = request.files["point_image"]
         extra_file = request.files["extra_image"]
@@ -35,18 +45,17 @@ def add_point():
         # 次のID
         new_id = len(points) + 1
 
-        # 画像ファイル名生成
-        stand_filename = f"{new_id}_stand.jpg"
-        point_filename = f"{new_id}_point.jpg"
-        extra_filename = f"{new_id}_extra.jpg"
+        # Cloudinaryにアップロード（ファイル名も付けておくと整理しやすい）
+        stand_result = cloudinary.uploader.upload(stand_file, public_id=f"points/{new_id}_stand")
+        point_result = cloudinary.uploader.upload(point_file, public_id=f"points/{new_id}_point")
+        extra_result = cloudinary.uploader.upload(extra_file, public_id=f"points/{new_id}_extra")
 
-        # 保存
-        os.makedirs(IMAGE_FOLDER, exist_ok=True)
-        stand_file.save(os.path.join(IMAGE_FOLDER, secure_filename(stand_filename)))
-        point_file.save(os.path.join(IMAGE_FOLDER, secure_filename(point_filename)))
-        extra_file.save(os.path.join(IMAGE_FOLDER, secure_filename(extra_filename)))
+        # URLを取得
+        stand_url = stand_result["secure_url"]
+        point_url = point_result["secure_url"]
+        extra_url = extra_result["secure_url"]
 
-        # 新しい定点を構築
+        # 定点データを作成
         new_point = {
             "id": new_id,
             "map": map_id,
@@ -54,15 +63,15 @@ def add_point():
             "agent": agent,
             "title": title,
             "description": description,
-            "stand_image": f"/static/images/points/{stand_filename}",
-            "point_image": f"/static/images/points/{point_filename}",
-            "extra_image": f"/static/images/points/{extra_filename}"
+            "stand_image": stand_url,
+            "point_image": point_url,
+            "extra_image": extra_url
         }
 
-        # JSONに追加・保存
+        # 保存
         points.append(new_point)
         with open(POINTS_JSON, "w", encoding="utf-8") as f:
-            json.dump(points, f, indent=3, ensure_ascii=False)
+            json.dump(points, f, indent=2, ensure_ascii=False)
 
         return "登録完了！<br><a href='/add'>もう一度追加する</a>"
 
