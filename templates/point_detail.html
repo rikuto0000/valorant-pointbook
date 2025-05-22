@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#ff4655">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/service-worker.js')
+        .then(reg => console.log("✅ Service Worker registered"))
+        .catch(err => console.error("❌ Service Worker error:", err));
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>定点詳細 | VALORANT Pointbook</title>
