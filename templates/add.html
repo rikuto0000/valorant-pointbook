@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>定点追加 | VALORANT Pointbook</title>
+
+  <!-- ✅ PWA対応 -->
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#ff4655">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pointbook">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
+  <!-- ✅ Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/service-worker.js')
@@ -11,29 +20,43 @@
         .catch(err => console.error("❌ Service Worker error:", err));
     }
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>定点追加 | VALORANT Pointbook</title>
 
-  <!-- Tailwind CSS -->
+  <!-- ✅ Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Rajdhani Font -->
+  <!-- ✅ Rajdhani Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Rajdhani', sans-serif;
     }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
+    }
   </style>
 </head>
 
 <body class="bg-[#0f1923] text-white min-h-screen p-4">
 
-  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">定点を追加</h1>
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655] animate-fade-up">
+    定点を追加
+  </h1>
 
   <form action="/add" method="POST" enctype="multipart/form-data"
-        class="bg-[#1c1c1c] p-6 rounded-xl max-w-xl mx-auto space-y-4 shadow-lg">
+        class="bg-[#1c1c1c] p-6 rounded-xl max-w-xl mx-auto space-y-4 shadow-lg animate-fade-up delay-100">
 
     <input type="text" name="title" placeholder="タイトル" required
            class="w-full p-3 rounded bg-gray-800 text-white placeholder-gray-400" />
@@ -41,7 +64,6 @@
     <textarea name="description" placeholder="説明" required
               class="w-full p-3 rounded bg-gray-800 text-white placeholder-gray-400"></textarea>
 
-    <!-- マップ選択 -->
     <label class="block font-semibold">🗺 マップ</label>
     <select name="map" required class="w-full p-3 rounded bg-gray-800 text-white">
       <option value="">選択してください</option>
@@ -57,16 +79,14 @@
       <option value="sunset">サンセット</option>
     </select>
 
-    <!-- サイド選択 -->
-    <label class="block font-semibold mt-4">⚔ サイド</label>
+    <label class="block font-semibold mt-2">⚔ サイド</label>
     <select name="side" required class="w-full p-3 rounded bg-gray-800 text-white">
       <option value="">選択してください</option>
       <option value="attack">攻撃</option>
       <option value="defense">防衛</option>
     </select>
 
-    <!-- エージェント選択 -->
-    <label class="block font-semibold mt-4">🧑‍🚀 エージェント</label>
+    <label class="block font-semibold mt-2">🧑‍🚀 エージェント</label>
     <select name="agent" required class="w-full p-3 rounded bg-gray-800 text-white">
       <option value="">選択してください</option>
       <option value="brimstone">ブリムストーン</option>
@@ -98,7 +118,6 @@
       <option value="waylay">ウェイレイ</option>
     </select>
 
-
     <label class="block font-semibold mt-4">📍 立ち位置画像</label>
     <input type="file" name="stand_image" accept="image/*" required class="w-full text-white" />
 
@@ -109,16 +128,11 @@
     <input type="file" name="extra_image" accept="image/*" required class="w-full text-white" />
 
     <button type="submit"
-            class="w-full bg-[#ff4655] hover:bg-[#e13d4b] text-white font-bold py-3 rounded-xl transition">
+            class="w-full bg-[#ff4655] hover:bg-[#e13d4b] active:bg-[#c63645]
+                   text-white font-bold py-3 rounded-xl transition transform hover:scale-105 active:scale-95">
       登録する
     </button>
   </form>
-
-  <!-- ➕ 定点追加ボタン（あってもOK） -->
-  <a href="/add"
-     class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
-    ➕ 定点追加
-  </a>
 
 </body>
 </html>

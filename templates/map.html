@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>攻守選択 | VALORANT Pointbook</title>
+
+  <!-- ✅ PWA設定 -->
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#ff4655">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pointbook">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
+  <!-- ✅ Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/service-worker.js')
@@ -11,38 +20,56 @@
         .catch(err => console.error("❌ Service Worker error:", err));
     }
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>攻守選択 | VALORANT Pointbook</title>
 
-  <!-- Tailwind CSS -->
+  <!-- ✅ Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Rajdhani Font -->
+  <!-- ✅ Rajdhani Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <!-- ✅ アニメーション -->
   <style>
     body {
       font-family: 'Rajdhani', sans-serif;
+    }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
     }
   </style>
 </head>
 
 <body class="bg-[#0f1923] text-white min-h-screen p-4">
 
-  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">
-    攻守を選択
-  </h1>
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">攻守を選択</h1>
 
-  <div class="flex flex-col items-center gap-6">
+  <div class="flex flex-col items-center gap-6 max-w-md mx-auto">
+
     <a href="/map/{{ map_id }}/side/attack"
-       class="w-64 text-center bg-[#ff4655] hover:bg-[#e13d4b] text-white font-bold py-3 px-6 rounded-xl shadow-lg text-xl transition">
+       class="w-full text-center bg-[#ff4655] hover:bg-[#e13d4b] active:bg-[#c63645]
+              text-white font-bold py-4 rounded-xl shadow-lg text-xl
+              transform transition hover:scale-105 active:scale-95 animate-fade-up">
       🗡 攻撃
     </a>
+
     <a href="/map/{{ map_id }}/side/defense"
-       class="w-64 text-center bg-[#00bcd4] hover:bg-[#00a3b9] text-white font-bold py-3 px-6 rounded-xl shadow-lg text-xl transition">
+       class="w-full text-center bg-[#00bcd4] hover:bg-[#00a3b9] active:bg-[#008fa6]
+              text-white font-bold py-4 rounded-xl shadow-lg text-xl
+              transform transition hover:scale-105 active:scale-95 animate-fade-up delay-200">
       🛡 防衛
     </a>
+
   </div>
 
   <!-- ➕ 定点追加ボタン -->

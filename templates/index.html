@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マップ選択 | VALORANT Pointbook</title>
+
+  <!-- ✅ PWA対応 -->
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#ff4655">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pointbook">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/service-worker.js')
@@ -11,40 +19,56 @@
         .catch(err => console.error("❌ Service Worker error:", err));
     }
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>マップ選択 | VALORANT Pointbook</title>
 
-  <!-- Tailwind CSS -->
+  <!-- ✅ Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Rajdhani Font（VALORANT風） -->
+  <!-- ✅ Rajdhani Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwindカスタム設定 -->
+  <!-- ✅ アニメーション設定 -->
   <style>
     body {
       font-family: 'Rajdhani', sans-serif;
+    }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
     }
   </style>
 </head>
 
 <body class="bg-[#0f1923] text-white min-h-screen p-4">
 
-  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">マップを選択</h1>
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">
+    マップを選択
+  </h1>
 
-  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
     {% for map in maps %}
-      <a href="/map/{{ map.id }}" class="bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] rounded-xl p-4 flex flex-col items-center transition shadow-lg">
-        <img src="{{ map.image }}" alt="{{ map.name }}" class="w-full h-32 object-cover rounded mb-3 border border-gray-700">
-        <div class="text-lg font-semibold text-center">{{ map.name }}</div>
+      <a href="/map/{{ map.id }}"
+         class="bg-[#1c1c1c] border border-[#ff4655] rounded-xl overflow-hidden shadow-lg
+                transform transition hover:scale-105 active:scale-95 hover:bg-[#2a2a2a] active:bg-[#151515]
+                animate-fade-up delay-{{ loop.index * 100 }} block">
+        <img src="{{ map.image }}" alt="{{ map.name }}" class="w-full h-32 object-cover">
       </a>
     {% endfor %}
   </div>
 
   <!-- ➕ 定点追加ボタン -->
   <a href="/add"
-    class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
+     class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg z-50">
     ➕ 定点追加
   </a>
 

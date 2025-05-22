@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ロール選択 | VALORANT Pointbook</title>
+
+  <!-- ✅ PWA対応 -->
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#ff4655">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pointbook">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
+  <!-- ✅ Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/service-worker.js')
@@ -11,19 +20,32 @@
         .catch(err => console.error("❌ Service Worker error:", err));
     }
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ロール選択 | VALORANT Pointbook</title>
 
-  <!-- Tailwind CSS -->
+  <!-- ✅ Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Rajdhani Font -->
+  <!-- ✅ Rajdhani Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <!-- ✅ アニメーション -->
   <style>
     body {
       font-family: 'Rajdhani', sans-serif;
+    }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
     }
   </style>
 </head>
@@ -35,22 +57,30 @@
   <div class="flex flex-col items-center gap-6 max-w-md mx-auto">
 
     <a href="/map/{{ map_id }}/side/{{ side }}/role/controller"
-       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+       class="w-full text-center bg-[#3a3a3a] hover:bg-[#4a4a4a] active:bg-[#2a2a2a]
+              text-white font-bold py-4 rounded-xl shadow-lg text-xl
+              transform transition hover:scale-105 active:scale-95 animate-fade-up">
       🌀 コントローラー
     </a>
 
     <a href="/map/{{ map_id }}/side/{{ side }}/role/initiator"
-       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+       class="w-full text-center bg-[#3a3a3a] hover:bg-[#4a4a4a] active:bg-[#2a2a2a]
+              text-white font-bold py-4 rounded-xl shadow-lg text-xl
+              transform transition hover:scale-105 active:scale-95 animate-fade-up delay-100">
       🔍 イニシエーター
     </a>
 
     <a href="/map/{{ map_id }}/side/{{ side }}/role/sentinel"
-       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+       class="w-full text-center bg-[#3a3a3a] hover:bg-[#4a4a4a] active:bg-[#2a2a2a]
+              text-white font-bold py-4 rounded-xl shadow-lg text-xl
+              transform transition hover:scale-105 active:scale-95 animate-fade-up delay-200">
       🛡 センチネル
     </a>
 
     <a href="/map/{{ map_id }}/side/{{ side }}/role/duelist"
-       class="w-full text-center bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] text-white font-bold py-4 rounded-xl shadow-lg text-xl transition">
+       class="w-full text-center bg-[#3a3a3a] hover:bg-[#4a4a4a] active:bg-[#2a2a2a]
+              text-white font-bold py-4 rounded-xl shadow-lg text-xl
+              transform transition hover:scale-105 active:scale-95 animate-fade-up delay-300">
       ⚔ デュエリスト
     </a>
 

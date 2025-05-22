@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>定点一覧 | VALORANT Pointbook</title>
+
+  <!-- ✅ PWA対応 -->
   <link rel="manifest" href="/static/manifest.json">
   <meta name="theme-color" content="#ff4655">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pointbook">
   <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
+  <!-- ✅ Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/service-worker.js')
@@ -11,19 +20,32 @@
         .catch(err => console.error("❌ Service Worker error:", err));
     }
   </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>定点一覧 | VALORANT Pointbook</title>
 
-  <!-- Tailwind CSS -->
+  <!-- ✅ Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Rajdhani Font -->
+  <!-- ✅ Rajdhani Font -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
 
+  <!-- ✅ アニメーション -->
   <style>
     body {
       font-family: 'Rajdhani', sans-serif;
+    }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
     }
   </style>
 </head>
@@ -31,13 +53,15 @@
 <body class="bg-[#0f1923] text-white min-h-screen p-4">
 
   <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-[#ff4655]">
-    定点一覧（{{ agent_id | capitalize }}）
+    定点一覧（{{ agent_id | capitalize }})
   </h1>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
     {% for point in points %}
       <a href="/point/{{ point.id }}"
-         class="bg-[#1c1c1c] border border-[#ff4655] hover:bg-[#2a2a2a] rounded-xl overflow-hidden shadow-lg transition flex flex-col">
+         class="bg-[#1c1c1c] border border-[#ff4655] rounded-xl overflow-hidden shadow-lg
+                transform transition hover:scale-105 active:scale-95 hover:bg-[#2a2a2a] active:bg-[#151515]
+                animate-fade-up delay-{{ loop.index * 100 }} flex flex-col">
         <img src="{{ point.point_image }}" alt="{{ point.title }}" class="w-full h-40 object-cover">
         <div class="p-4 flex-1 flex flex-col">
           <div class="font-bold text-lg text-[#ff4655] mb-1">{{ point.title }}</div>
